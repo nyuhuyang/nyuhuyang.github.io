@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yang Hu — Learning Notes</title>
+<style>
+  :root { --accent: #2E5AAC; --muted: #6b7280; --rule: #e5e7eb; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, "Helvetica Neue", "PingFang SC",
+         "Microsoft YaHei", sans-serif; color: #1f2937; line-height: 1.65; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+  header h1 { margin: 0 0 0.2rem; font-size: 1.9rem; }
+  header p  { margin: 0.15rem 0; color: var(--muted); }
+  header a  { color: var(--accent); text-decoration: none; }
+  .lang-note { font-size: 0.85rem; color: var(--muted); margin-top: 0.6rem; }
+  h2 { font-size: 1.15rem; border-bottom: 1px solid var(--rule);
+       padding-bottom: 0.4rem; margin-top: 2.4rem; }
+  ul.notes { list-style: none; padding: 0; }
+  ul.notes li { padding: 0.55rem 0; border-bottom: 1px dashed var(--rule); }
+  ul.notes a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  ul.notes a:hover { text-decoration: underline; }
+  .desc { color: var(--muted); font-size: 0.92rem; display: block; }
+  .tag { font-size: 0.75rem; background: #eef2ff; color: #3730a3;
+         border-radius: 4px; padding: 0.05rem 0.45rem; margin-left: 0.4rem; }
+  footer { margin-top: 3rem; font-size: 0.85rem; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Yang Hu</h1>
+    <p>AI Scientist @ Rancho Biosciences</p>
+    <p><a href="https://github.com/nyuhuyang">GitHub</a> ·
+       <a href="https://www.linkedin.com/in/yhu01">LinkedIn</a></p>
+    <p class="lang-note">学习笔记，用可复现的 R Markdown 写成。中文为主，英文版逐步补齐。<br>
+       Learning notes written as reproducible R Markdown. Mostly in Chinese; English versions coming.</p>
+  </header>
+
+  <h2>Statistics / 统计</h2>
+  <ul class="notes">
+    <li>
+      <a href="notes/distribution_mechanics.html">分布的机理：四种运算生成一切</a>
+      <span class="tag">中文</span>
+      <span class="desc">逆 CDF 变换、幂变换、求和（CLT/Gamma/χ²）、取比值（t/F）——用真实模拟数据把常见分布之间的生成关系画出来。</span>
+    </li>
+  </ul>
+
+  <footer>Built with R Markdown · Hosted on GitHub Pages</footer>
+</div>
+</body>
+</html>
