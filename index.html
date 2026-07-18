@@ -9,19 +9,23 @@
   * { box-sizing: border-box; }
   body { margin: 0; font-family: -apple-system, "Helvetica Neue", "PingFang SC",
          "Microsoft YaHei", sans-serif; color: #1f2937; line-height: 1.65; }
-  .wrap { max-width: 720px; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 3rem 1.25rem 4rem;
+          position: relative; }
   header h1 { margin: 0 0 0.2rem; font-size: 1.9rem; }
   header p  { margin: 0.15rem 0; color: var(--muted); }
   header a  { color: var(--accent); text-decoration: none; }
   .lang-note { font-size: 0.85rem; color: var(--muted); margin-top: 0.6rem; }
-  .lang-select { margin-top: 0.9rem; display: inline-flex; align-items: center;
-        gap: 0.5rem; font-size: 0.85rem; color: var(--muted); }
-  .lang-select select { font: inherit; font-size: 0.85rem; color: var(--accent);
-        background: #fff; border: 1px solid var(--rule); border-radius: 6px;
-        padding: 0.25rem 0.6rem; cursor: pointer; }
-  .lang-select select:hover { border-color: var(--accent); }
-  li.hidden { display: none; }
-  h2.hidden { display: none; }
+
+  /* top-right language switch */
+  .langbar { position: absolute; top: 1.4rem; right: 1.25rem;
+             font-size: 0.85rem; display: flex; gap: 0.1rem; align-items: center; }
+  .langbar button { font: inherit; font-size: 0.85rem; cursor: pointer;
+             background: none; border: none; color: var(--muted);
+             padding: 0.15rem 0.5rem; border-radius: 5px; }
+  .langbar button:hover { color: var(--accent); }
+  .langbar button[aria-pressed="true"] { color: var(--accent); font-weight: 700; }
+  .langbar .sep { color: var(--rule); }
+
   h2 { font-size: 1.15rem; border-bottom: 1px solid var(--rule);
        padding-bottom: 0.4rem; margin-top: 2.4rem; }
   ul.notes { list-style: none; padding: 0; }
@@ -32,57 +36,80 @@
   .tag { font-size: 0.75rem; background: #eef2ff; color: #3730a3;
          border-radius: 4px; padding: 0.05rem 0.45rem; margin-left: 0.4rem; }
   footer { margin-top: 3rem; font-size: 0.85rem; color: var(--muted); }
+  .hidden { display: none; }
 </style>
 </head>
 <body>
 <div class="wrap">
+
+  <div class="langbar" role="group" aria-label="Language / 语言">
+    <button type="button" data-lang="zh">中文</button>
+    <span class="sep">|</span>
+    <button type="button" data-lang="en">English</button>
+  </div>
+
   <header>
     <h1>Yang Hu</h1>
-    <p>AI Scientist @ Rancho Biosciences</p>
+    <p data-zh="AI 科学家 @ Rancho Biosciences"
+       data-en="AI Scientist @ Rancho Biosciences">AI Scientist @ Rancho Biosciences</p>
     <p><a href="https://github.com/nyuhuyang">GitHub</a> ·
        <a href="https://www.linkedin.com/in/yhu01">LinkedIn</a></p>
-    <p class="lang-note">学习笔记，用可复现的 R Markdown 写成。<br>
-       Learning notes written as reproducible R Markdown.</p>
-    <label class="lang-select">语言 / Language:
-      <select id="langFilter">
-        <option value="all">全部 / All</option>
-        <option value="zh">中文</option>
-        <option value="en">English</option>
-      </select>
-    </label>
+    <p class="lang-note"
+       data-zh="学习笔记，用可复现的 R Markdown 写成。"
+       data-en="Learning notes written as reproducible R Markdown.">学习笔记，用可复现的 R Markdown 写成。</p>
   </header>
 
-  <h2>Statistics / 统计</h2>
+  <h2 data-zh="统计" data-en="Statistics">统计</h2>
   <ul class="notes">
     <li data-lang="zh">
       <a href="notes/exp_normal_boltzmann.html">从熵到分布：指数、幂律、正态与玻尔兹曼的统一逻辑</a>
-      <span class="tag">中文</span>
       <span class="desc">最大熵原理如何在不同约束下生成指数、幂律、正态、玻尔兹曼四种分布——含 Lagrange 乘子的几何图景、计数论证、CLT 的傅里叶证明、幂律↔指数的 Gamma 桥与物理实例。更新于 2026-07-12。</span>
     </li>
     <li data-lang="en">
       <a href="notes/exp_normal_boltzmann_en.html">From Entropy to Distributions: The Unified Logic of Exponential, Power-Law, Normal, and Boltzmann</a>
-      <span class="tag">EN</span>
-      <span class="desc">How the maximum-entropy principle generates the exponential, power-law, normal, and Boltzmann distributions under different constraints—with the geometry of Lagrange multipliers, the counting argument, a Fourier proof of the CLT, the power-law↔exponential Gamma bridge, and physical examples. English translation of the note above.</span>
+      <span class="desc">How the maximum-entropy principle generates the exponential, power-law, normal, and Boltzmann distributions under different constraints—with the geometry of Lagrange multipliers, the counting argument, a Fourier proof of the CLT, the power-law↔exponential Gamma bridge, and physical examples.</span>
     </li>
   </ul>
 
-  <footer>Built with R Markdown · Hosted on GitHub Pages</footer>
+  <footer data-zh="用 R Markdown 编写 · 托管于 GitHub Pages"
+          data-en="Built with R Markdown · Hosted on GitHub Pages">Built with R Markdown · Hosted on GitHub Pages</footer>
 </div>
+
 <script>
-  var items = document.querySelectorAll('ul.notes li');
-  function apply(filter) {
-    items.forEach(function (li) {
-      li.classList.toggle('hidden', filter !== 'all' && li.dataset.lang !== filter);
+  var LANGS = { zh: "zh-CN", en: "en" };
+  var i18n = document.querySelectorAll("[data-zh]");
+  var notes = document.querySelectorAll("ul.notes li");
+  var btns = document.querySelectorAll(".langbar button");
+
+  function setLang(lang) {
+    if (lang !== "zh" && lang !== "en") lang = "zh";
+    document.documentElement.lang = LANGS[lang];
+    // swap UI chrome text
+    i18n.forEach(function (el) { el.textContent = el.dataset[lang]; });
+    // show only notes in this language
+    notes.forEach(function (li) {
+      li.classList.toggle("hidden", li.dataset.lang !== lang);
     });
-    // hide a section heading if it has no visible note under it
-    document.querySelectorAll('h2').forEach(function (h) {
+    // hide a section heading with no visible note under it
+    document.querySelectorAll("h2").forEach(function (h) {
       var list = h.nextElementSibling;
-      var visible = list && list.querySelector('li:not(.hidden)');
-      h.classList.toggle('hidden', !visible);
+      h.classList.toggle("hidden", !(list && list.querySelector("li:not(.hidden)")));
     });
+    btns.forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.lang === lang));
+    });
+    try { localStorage.setItem("lang", lang); } catch (e) {}
   }
-  document.getElementById('langFilter')
-    .addEventListener('change', function () { apply(this.value); });
+
+  btns.forEach(function (b) {
+    b.addEventListener("click", function () { setLang(b.dataset.lang); });
+  });
+
+  // initial language: saved choice → browser language → Chinese default
+  var saved = null;
+  try { saved = localStorage.getItem("lang"); } catch (e) {}
+  var browserZh = (navigator.language || "").toLowerCase().indexOf("zh") === 0;
+  setLang(saved || (browserZh ? "zh" : "en"));
 </script>
 </body>
 </html>
