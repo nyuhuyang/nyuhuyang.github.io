@@ -14,13 +14,12 @@
   header p  { margin: 0.15rem 0; color: var(--muted); }
   header a  { color: var(--accent); text-decoration: none; }
   .lang-note { font-size: 0.85rem; color: var(--muted); margin-top: 0.6rem; }
-  .lang-toggle { margin-top: 0.9rem; display: flex; gap: 0.4rem; }
-  .lang-toggle button { font: inherit; font-size: 0.82rem; cursor: pointer;
-        color: var(--accent); background: #fff; border: 1px solid var(--rule);
-        border-radius: 6px; padding: 0.25rem 0.7rem; }
-  .lang-toggle button:hover { border-color: var(--accent); }
-  .lang-toggle button.active { background: var(--accent); color: #fff;
-        border-color: var(--accent); }
+  .lang-select { margin-top: 0.9rem; display: inline-flex; align-items: center;
+        gap: 0.5rem; font-size: 0.85rem; color: var(--muted); }
+  .lang-select select { font: inherit; font-size: 0.85rem; color: var(--accent);
+        background: #fff; border: 1px solid var(--rule); border-radius: 6px;
+        padding: 0.25rem 0.6rem; cursor: pointer; }
+  .lang-select select:hover { border-color: var(--accent); }
   li.hidden { display: none; }
   h2.hidden { display: none; }
   h2 { font-size: 1.15rem; border-bottom: 1px solid var(--rule);
@@ -44,11 +43,13 @@
        <a href="https://www.linkedin.com/in/yhu01">LinkedIn</a></p>
     <p class="lang-note">学习笔记，用可复现的 R Markdown 写成。<br>
        Learning notes written as reproducible R Markdown.</p>
-    <div class="lang-toggle" role="group" aria-label="Language filter">
-      <button type="button" data-filter="all" class="active">全部 / All</button>
-      <button type="button" data-filter="zh">中文</button>
-      <button type="button" data-filter="en">English</button>
-    </div>
+    <label class="lang-select">语言 / Language:
+      <select id="langFilter">
+        <option value="all">全部 / All</option>
+        <option value="zh">中文</option>
+        <option value="en">English</option>
+      </select>
+    </label>
   </header>
 
   <h2>Statistics / 统计</h2>
@@ -68,7 +69,6 @@
   <footer>Built with R Markdown · Hosted on GitHub Pages</footer>
 </div>
 <script>
-  var buttons = document.querySelectorAll('.lang-toggle button');
   var items = document.querySelectorAll('ul.notes li');
   function apply(filter) {
     items.forEach(function (li) {
@@ -81,13 +81,8 @@
       h.classList.toggle('hidden', !visible);
     });
   }
-  buttons.forEach(function (b) {
-    b.addEventListener('click', function () {
-      buttons.forEach(function (x) { x.classList.remove('active'); });
-      b.classList.add('active');
-      apply(b.dataset.filter);
-    });
-  });
+  document.getElementById('langFilter')
+    .addEventListener('change', function () { apply(this.value); });
 </script>
 </body>
 </html>
