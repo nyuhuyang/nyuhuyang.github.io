@@ -14,6 +14,15 @@
   header p  { margin: 0.15rem 0; color: var(--muted); }
   header a  { color: var(--accent); text-decoration: none; }
   .lang-note { font-size: 0.85rem; color: var(--muted); margin-top: 0.6rem; }
+  .lang-toggle { margin-top: 0.9rem; display: flex; gap: 0.4rem; }
+  .lang-toggle button { font: inherit; font-size: 0.82rem; cursor: pointer;
+        color: var(--accent); background: #fff; border: 1px solid var(--rule);
+        border-radius: 6px; padding: 0.25rem 0.7rem; }
+  .lang-toggle button:hover { border-color: var(--accent); }
+  .lang-toggle button.active { background: var(--accent); color: #fff;
+        border-color: var(--accent); }
+  li.hidden { display: none; }
+  h2.hidden { display: none; }
   h2 { font-size: 1.15rem; border-bottom: 1px solid var(--rule);
        padding-bottom: 0.4rem; margin-top: 2.4rem; }
   ul.notes { list-style: none; padding: 0; }
@@ -33,18 +42,23 @@
     <p>AI Scientist @ Rancho Biosciences</p>
     <p><a href="https://github.com/nyuhuyang">GitHub</a> ·
        <a href="https://www.linkedin.com/in/yhu01">LinkedIn</a></p>
-    <p class="lang-note">学习笔记，用可复现的 R Markdown 写成。中文为主，英文版逐步补齐。<br>
-       Learning notes written as reproducible R Markdown. Mostly in Chinese; English versions coming.</p>
+    <p class="lang-note">学习笔记，用可复现的 R Markdown 写成。<br>
+       Learning notes written as reproducible R Markdown.</p>
+    <div class="lang-toggle" role="group" aria-label="Language filter">
+      <button type="button" data-filter="all" class="active">全部 / All</button>
+      <button type="button" data-filter="zh">中文</button>
+      <button type="button" data-filter="en">English</button>
+    </div>
   </header>
 
   <h2>Statistics / 统计</h2>
   <ul class="notes">
-    <li>
+    <li data-lang="zh">
       <a href="notes/exp_normal_boltzmann.html">从熵到分布：指数、幂律、正态与玻尔兹曼的统一逻辑</a>
       <span class="tag">中文</span>
       <span class="desc">最大熵原理如何在不同约束下生成指数、幂律、正态、玻尔兹曼四种分布——含 Lagrange 乘子的几何图景、计数论证、CLT 的傅里叶证明、幂律↔指数的 Gamma 桥与物理实例。更新于 2026-07-12。</span>
     </li>
-    <li>
+    <li data-lang="en">
       <a href="notes/exp_normal_boltzmann_en.html">From Entropy to Distributions: The Unified Logic of Exponential, Power-Law, Normal, and Boltzmann</a>
       <span class="tag">EN</span>
       <span class="desc">How the maximum-entropy principle generates the exponential, power-law, normal, and Boltzmann distributions under different constraints—with the geometry of Lagrange multipliers, the counting argument, a Fourier proof of the CLT, the power-law↔exponential Gamma bridge, and physical examples. English translation of the note above.</span>
@@ -53,5 +67,27 @@
 
   <footer>Built with R Markdown · Hosted on GitHub Pages</footer>
 </div>
+<script>
+  var buttons = document.querySelectorAll('.lang-toggle button');
+  var items = document.querySelectorAll('ul.notes li');
+  function apply(filter) {
+    items.forEach(function (li) {
+      li.classList.toggle('hidden', filter !== 'all' && li.dataset.lang !== filter);
+    });
+    // hide a section heading if it has no visible note under it
+    document.querySelectorAll('h2').forEach(function (h) {
+      var list = h.nextElementSibling;
+      var visible = list && list.querySelector('li:not(.hidden)');
+      h.classList.toggle('hidden', !visible);
+    });
+  }
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      buttons.forEach(function (x) { x.classList.remove('active'); });
+      b.classList.add('active');
+      apply(b.dataset.filter);
+    });
+  });
+</script>
 </body>
 </html>
