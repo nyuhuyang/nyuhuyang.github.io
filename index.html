@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,9 +43,9 @@
 <div class="wrap">
 
   <div class="langbar" role="group" aria-label="Language / 语言">
-    <button type="button" data-lang="zh">中文</button>
-    <span class="sep">|</span>
     <button type="button" data-lang="en">English</button>
+    <span class="sep">|</span>
+    <button type="button" data-lang="zh">中文</button>
   </div>
 
   <header>
@@ -56,10 +56,10 @@
        <a href="https://www.linkedin.com/in/yhu01">LinkedIn</a></p>
     <p class="lang-note"
        data-zh="学习笔记，用可复现的 R Markdown 写成。"
-       data-en="Learning notes written as reproducible R Markdown.">学习笔记，用可复现的 R Markdown 写成。</p>
+       data-en="Learning notes written as reproducible R Markdown.">Learning notes written as reproducible R Markdown.</p>
   </header>
 
-  <h2 data-zh="统计" data-en="Statistics">统计</h2>
+  <h2 data-zh="统计" data-en="Statistics">Statistics</h2>
   <ul class="notes">
     <li data-lang="zh">
       <a href="notes/exp_normal_boltzmann.html">从熵到分布：指数、幂律、正态与玻尔兹曼的统一逻辑</a>
@@ -105,11 +105,10 @@
     b.addEventListener("click", function () { setLang(b.dataset.lang); });
   });
 
-  // initial language: saved choice → browser language → Chinese default
+  // initial language: saved choice → English default
   var saved = null;
   try { saved = localStorage.getItem("lang"); } catch (e) {}
-  var browserZh = (navigator.language || "").toLowerCase().indexOf("zh") === 0;
-  setLang(saved || (browserZh ? "zh" : "en"));
+  setLang(saved || "en");
 </script>
 </body>
 </html>
