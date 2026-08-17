@@ -1691,7 +1691,7 @@ border-radius: 0px;
 Logic of Exponential, Power-Law, Normal, and Boltzmann</h1>
 <h4 class="author">Dr. Yang Hu</h4>
 <h4 class="date">First published: 2026-07-12 | Last updated: 2026-08-17
-12:14 EDT</h4>
+12:22 EDT</h4>
 
 </div>
 
@@ -4732,6 +4732,66 @@ the exponential and the Gaussian are its two faces under linear and
 quadratic energy</strong>, with the Maxwell speed distribution arising
 once the density of states is folded in. This chapter walks through them
 in that order.</p>
+<p><strong>Following that thread, one thing deserves to be said plainly:
+the Boltzmann form by itself rules out no distribution at all.</strong>
+Given any strictly positive density <span class="math inline">\(p(x)\)</span>, simply define</p>
+<p><span class="math display">\[E(x) \;\equiv\; -k_BT\ln
+p(x)\]</span></p>
+<p>and immediately <span class="math inline">\(p(x)\propto
+e^{-E(x)/k_BT}\)</span>. In other words, <strong>“this is a Boltzmann
+distribution,” read as a claim about the variable <span class="math inline">\(x\)</span>, is a tautology</strong>—every positive
+density can be written that way.</p>
+<p>That makes it a different kind of object from a <em>family</em> such
+as the Gamma:</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Type</th>
+<th align="left">How it “contains” other distributions</th>
+<th align="left">Strength as a claim</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Gamma</td>
+<td align="left">a genuine <strong>two-parameter family</strong> <span class="math inline">\(x^{k-1}e^{-\lambda x}\)</span></td>
+<td align="left"><strong>turn the parameters</strong>: <span class="math inline">\(k=1\)</span> gives the exponential, <span class="math inline">\(k=\nu/2\)</span> the chi-squared (note it does
+<strong>not</strong> contain the normal; <span class="math inline">\(k\to\infty\)</span> is only asymptotic)</td>
+<td align="left">a strong claim, falsifiable by data</td>
+</tr>
+<tr class="even">
+<td align="left">Boltzmann</td>
+<td align="left">a <strong>recipe</strong> with a free function <span class="math inline">\(E(x)\)</span></td>
+<td align="left"><strong>swap the function</strong>: <span class="math inline">\(E\)</span> linear gives the exponential, quadratic
+gives the normal (both exactly)</td>
+<td align="left">with <span class="math inline">\(E\)</span>
+unspecified, rules out nothing</td>
+</tr>
+</tbody>
+</table>
+<p>The whole force of the Boltzmann factor therefore lies <strong>not in
+the exponential form but in physics telling you, independently, what
+<span class="math inline">\(E(x)\)</span> is</strong>—gravity supplies
+<span class="math inline">\(mgh\)</span>, a spring supplies <span class="math inline">\(\frac12\kappa x^2\)</span>, kinetic energy
+supplies <span class="math inline">\(\frac12 mv^2\)</span>. <span class="math inline">\(E\)</span> is an external input, not something
+fitted to the data; once <span class="math inline">\(E\)</span> is
+pinned down, <span class="math inline">\(e^{-E/k_BT}\)</span> becomes a
+distribution with temperature as its only free parameter, and it can be
+falsified.</p>
+<p>The real umbrella, then, is not the Boltzmann distribution but the
+<strong>exponential family</strong> of the closing chapter, <span class="math inline">\(p\propto m(x)e^{-\sum_i\lambda_i f_i(x)}\)</span>:
+the exponential (<span class="math inline">\(f=x\)</span>), power law
+(<span class="math inline">\(f=\ln x\)</span>), normal (<span class="math inline">\(f=x,x^2\)</span>) and Gamma (<span class="math inline">\(f=x,\ln x\)</span>) are <strong>siblings</strong>
+under that umbrella—each a different choice of <span class="math inline">\(f\)</span>—while Boltzmann is the branch that
+<strong>leaves <span class="math inline">\(f\)</span> blank and lets
+physics fill it in</strong>.</p>
 <p><strong><span class="math inline">\(\lambda\)</span> is the Lagrange
 multiplier. Physicists gave it a name: <span class="math inline">\(\beta
 = 1/(k_BT)\)</span>.</strong></p>
@@ -5182,7 +5242,7 @@ honest under limited information.”</strong></p>
 <hr />
 <p><em>By Dr. Yang Hu. English translation drafted with Claude (Opus
 4.8), reviewed by the author.</em></p>
-<p><em>First published: 2026-07-12. Last updated: 2026-08-17 12:14
+<p><em>First published: 2026-07-12. Last updated: 2026-08-17 12:22
 EDT.</em></p>
 </div>
 <div id="bibliography" class="section level1 unnumbered">

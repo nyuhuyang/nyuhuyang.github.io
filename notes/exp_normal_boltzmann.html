@@ -1689,7 +1689,7 @@ border-radius: 0px;
 
 <h1 class="title toc-ignore">从熵到分布：指数、幂律、正态与玻尔兹曼的统一逻辑</h1>
 <h4 class="author">胡杨博士</h4>
-<h4 class="date">首次发布：2026-07-12 | 最后更新：2026-08-17 12:14
+<h4 class="date">首次发布：2026-07-12 | 最后更新：2026-08-17 12:22
 EDT</h4>
 
 </div>
@@ -4169,6 +4169,56 @@ x^2\)</span></td>
 <p>所以”指数、高斯、玻尔兹曼”不是三个互相竞争的分布：<strong>玻尔兹曼因子是共用的机制，指数和高斯是它在一次
 / 二次能量下的两张脸</strong>，Maxwell
 速率则是再乘上态密度的结果。本章按这个顺序逐个走一遍。</p>
+<p><strong>顺着这一层，得说清一件容易被高估的事：玻尔兹曼形式本身没有排除任何分布。</strong>
+给定任意一个处处为正的密度 <span class="math inline">\(p(x)\)</span>，只要定义</p>
+<p><span class="math display">\[E(x) \;\equiv\; -k_BT\ln
+p(x)\]</span></p>
+<p>立刻就有 <span class="math inline">\(p(x)\propto
+e^{-E(x)/k_BT}\)</span>。也就是说，<strong>“这是玻尔兹曼分布”作为一句关于变量
+<span class="math inline">\(x\)</span>
+的主张，是同义反复</strong>——任何正密度都写得成这个样子。</p>
+<p>这和 Gamma 那类”分布族”是两种东西：</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">类型</th>
+<th align="left">怎么把别的分布”包含”进来</th>
+<th align="left">作为主张的强度</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Gamma</td>
+<td align="left">真正的<strong>两参数族</strong> <span class="math inline">\(x^{k-1}e^{-\lambda x}\)</span></td>
+<td align="left"><strong>拨参数</strong>：<span class="math inline">\(k=1\)</span> 得指数、<span class="math inline">\(k=\nu/2\)</span>
+得卡方（注意<strong>不含正态</strong>，<span class="math inline">\(k\to\infty\)</span> 只是渐近）</td>
+<td align="left">强主张，能被数据否证</td>
+</tr>
+<tr class="even">
+<td align="left">玻尔兹曼</td>
+<td align="left">留了自由函数 <span class="math inline">\(E(x)\)</span>
+的<strong>配方</strong></td>
+<td align="left"><strong>换函数</strong>：<span class="math inline">\(E\)</span>
+一次得指数、二次得正态（两者都是精确成员）</td>
+<td align="left">不指定 <span class="math inline">\(E\)</span>
+时不排除任何分布</td>
+</tr>
+</tbody>
+</table>
+<p>于是玻尔兹曼因子的全部力量，<strong>不在那个指数形式里，而在”物理独立地告诉你
+<span class="math inline">\(E(x)\)</span> 是什么”</strong>——重力给 <span class="math inline">\(mgh\)</span>、弹簧给 <span class="math inline">\(\frac12\kappa x^2\)</span>、动能给 <span class="math inline">\(\frac12 mv^2\)</span>。<span class="math inline">\(E\)</span>
+是从外部输入的，不是从数据里拟合出来的；一旦 <span class="math inline">\(E\)</span> 被钉死，<span class="math inline">\(e^{-E/k_BT}\)</span>
+就变回一个只剩温度这一个参数的、可以被证伪的分布。</p>
+<p>真正的那把伞也不是玻尔兹曼，而是末章的<strong>指数族</strong> <span class="math inline">\(p\propto m(x)e^{-\sum_i\lambda_i
+f_i(x)}\)</span>：指数（<span class="math inline">\(f=x\)</span>）、幂律（<span class="math inline">\(f=\ln x\)</span>）、正态（<span class="math inline">\(f=x,x^2\)</span>）、Gamma（<span class="math inline">\(f=x,\ln
+x\)</span>）在这把伞下是<strong>兄弟关系</strong>（各自换了 <span class="math inline">\(f\)</span>），而玻尔兹曼是其中”把 <span class="math inline">\(f\)</span> 留白、交给物理去填”的那一支。</p>
 <p><strong><span class="math inline">\(\lambda\)</span> 就是 Lagrange
 乘子。物理学家给它取了个名字：<span class="math inline">\(\beta =
 1/(k_BT)\)</span>。</strong></p>
@@ -4561,7 +4611,7 @@ Lagrangian，对分布逐点求导，通解一步落地：<span class="math inli
 </blockquote>
 <hr />
 <p><em>作者：胡杨博士 ｜ 首次发布：2026-07-12 ｜ 最后更新：2026-08-17
-12:14 EDT</em></p>
+12:22 EDT</em></p>
 </div>
 <div id="bibliography" class="section level1 unnumbered">
 <h1 class="unnumbered">参考文献</h1>
