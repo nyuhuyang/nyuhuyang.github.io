@@ -1691,7 +1691,7 @@ border-radius: 0px;
 Logic of Exponential, Power-Law, Normal, and Boltzmann</h1>
 <h4 class="author">Dr. Yang Hu</h4>
 <h4 class="date">First published: 2026-07-12 | Last updated: 2026-08-17
-11:49 EDT</h4>
+12:14 EDT</h4>
 
 </div>
 
@@ -4584,6 +4584,26 @@ bond length, with the distribution widening at higher temperature (<span class="
 measurable in vibrational spectra. The velocity components of gas
 molecules follow the same logic (the kinetic energy <span class="math inline">\(\frac{1}{2}mv_x^2\)</span> is also quadratic), see
 the “Boltzmann distribution” chapter.</p>
+<p><strong>Why does this give a Gaussian rather than “the Boltzmann
+distribution”?</strong> Because <strong>the Boltzmann factor is the
+mechanism, and which named distribution you get is decided by the degree
+of <span class="math inline">\(E(x)\)</span></strong>. All <span class="math inline">\(e^{-E/k_BT}\)</span> says is that probability
+decays exponentially in energy; it says nothing about how the coordinate
+<span class="math inline">\(x\)</span> is distributed—that depends on
+how energy depends on <span class="math inline">\(x\)</span>:</p>
+<ul>
+<li>potential <strong>linear</strong> in the coordinate (the isothermal
+atmosphere’s <span class="math inline">\(E = mgh\)</span>) → <span class="math inline">\(e^{-mgh/k_BT}\)</span> is an <strong>exponential
+distribution</strong> in <span class="math inline">\(h\)</span>;</li>
+<li>potential <strong>quadratic</strong> in the coordinate (here <span class="math inline">\(E = \frac12\kappa x^2\)</span>, or the kinetic
+energy <span class="math inline">\(\frac12 mv_x^2\)</span>) → <span class="math inline">\(e^{-\kappa x^2/2k_BT}\)</span> is a
+<strong>Gaussian</strong> in <span class="math inline">\(x\)</span>.</li>
+</ul>
+<p>One factor, one substitution of <span class="math inline">\(E(x)\)</span>, a different named distribution. So
+the exponential and the Gaussian are not <em>competitors</em> of the
+Boltzmann distribution—they are <strong>two faces of it under different
+forms of the energy</strong>. The next chapter walks this line all the
+way through, Maxwell speed distribution included.</p>
 <p><strong>Brownian diffusion</strong>. Drop ink into water, and each
 pigment particle’s displacement is the <strong>accumulation</strong> of
 impulses from countless molecular collisions—precisely the physical
@@ -4658,6 +4678,60 @@ derivation is just maximum entropy:</p>
 <li>maximum-entropy solution: <span class="math inline">\(p \propto
 e^{-\lambda E}\)</span></li>
 </ul>
+<p><strong>First, how this chapter sits relative to the earlier
+ones.</strong> In the opening table, the first three rows constrain an
+explicit function of <span class="math inline">\(x\)</span> (<span class="math inline">\(x\)</span>, <span class="math inline">\(\ln
+x\)</span>, <span class="math inline">\(x^2\)</span>), whereas this row
+reads <span class="math inline">\(f(x) = E(x)\)</span>—<strong>a master
+statement, not a fourth named distribution standing beside the
+others</strong>. Once <span class="math inline">\(E(x)\)</span> is
+specified, what falls out is one of the distributions already met:</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">How energy depends on the variable</th>
+<th align="left"><span class="math inline">\(e^{-E/k_BT}\)</span>
+becomes</th>
+<th align="left">Instance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><span class="math inline">\(E\)</span>
+<strong>linear</strong> in the variable: <span class="math inline">\(E =
+mgh\)</span>, evenly spaced levels</td>
+<td align="left">an <strong>exponential distribution</strong> in that
+variable</td>
+<td align="left">isothermal atmosphere, level occupancy</td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(E\)</span>
+<strong>quadratic</strong>: <span class="math inline">\(E = \frac12
+mv_x^2\)</span>, <span class="math inline">\(\frac12\kappa
+x^2\)</span></td>
+<td align="left">a <strong>Gaussian</strong> in that variable</td>
+<td align="left">velocity components, bond vibration</td>
+</tr>
+<tr class="odd">
+<td align="left">quadratic energy <span class="math inline">\(+\)</span>
+non-uniform density of states <span class="math inline">\(g(v)\propto
+v^2\)</span></td>
+<td align="left">the <strong>Maxwell speed distribution</strong></td>
+<td align="left">molecular speeds</td>
+</tr>
+</tbody>
+</table>
+<p>So “exponential, Gaussian, Boltzmann” are not three competing
+distributions: <strong>the Boltzmann factor is the shared mechanism, and
+the exponential and the Gaussian are its two faces under linear and
+quadratic energy</strong>, with the Maxwell speed distribution arising
+once the density of states is folded in. This chapter walks through them
+in that order.</p>
 <p><strong><span class="math inline">\(\lambda\)</span> is the Lagrange
 multiplier. Physicists gave it a name: <span class="math inline">\(\beta
 = 1/(k_BT)\)</span>.</strong></p>
@@ -5108,7 +5182,7 @@ honest under limited information.”</strong></p>
 <hr />
 <p><em>By Dr. Yang Hu. English translation drafted with Claude (Opus
 4.8), reviewed by the author.</em></p>
-<p><em>First published: 2026-07-12. Last updated: 2026-08-17 11:49
+<p><em>First published: 2026-07-12. Last updated: 2026-08-17 12:14
 EDT.</em></p>
 </div>
 <div id="bibliography" class="section level1 unnumbered">
