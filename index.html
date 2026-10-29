@@ -26,8 +26,15 @@
   .langbar button[aria-pressed="true"] { color: var(--accent); font-weight: 700; }
   .langbar .sep { color: var(--rule); }
 
-  h2 { font-size: 1.15rem; border-bottom: 1px solid var(--rule);
-       padding-bottom: 0.4rem; margin-top: 2.4rem; }
+  /* category filter */
+  .tagbar { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 2.4rem; }
+  .tagbtn { font: inherit; font-size: 0.85rem; cursor: pointer;
+            background: #fff; color: var(--muted); border: 1px solid var(--rule);
+            padding: 0.25rem 0.85rem; border-radius: 999px; }
+  .tagbtn:hover { color: var(--accent); border-color: var(--accent); }
+  .tagbtn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent);
+            color: #fff; font-weight: 600; }
+
   ul.notes { list-style: none; padding: 0; }
   ul.notes li { padding: 0.55rem 0; border-bottom: 1px dashed var(--rule); }
   ul.notes a { color: var(--accent); text-decoration: none; font-weight: 600; }
@@ -69,30 +76,43 @@
        data-en="Below are my learning notes and teaching notes, all written as reproducible R Markdown.">Below are my learning notes and teaching notes, all written as reproducible R Markdown.</p>
   </header>
 
-  <h2 data-zh="统计" data-en="Statistics">Statistics</h2>
+  <div class="tagbar" role="group" aria-label="分类 / Category">
+    <button type="button" class="tagbtn" data-cat="all"
+            data-zh="全部" data-en="All" aria-pressed="true">全部</button>
+    <button type="button" class="tagbtn" data-cat="stats"
+            data-zh="统计" data-en="Statistics" aria-pressed="false">统计</button>
+    <button type="button" class="tagbtn" data-cat="econ"
+            data-zh="经济" data-en="Economics" aria-pressed="false">经济</button>
+  </div>
   <ul class="notes">
-    <li data-lang="zh">
+    <li data-lang="zh" data-cat="stats">
       <a href="notes/exp_normal_boltzmann_zh.html">从熵到分布：指数、幂律、正态与玻尔兹曼的统一逻辑</a>
+      <span class="tag" data-zh="统计" data-en="Statistics">统计</span>
       <span class="desc">最大熵原理如何在不同约束下生成指数、幂律、正态、玻尔兹曼四种分布——含拉格朗日乘子的几何图景、计数论证、CLT 的傅里叶证明、幂律↔指数的 Gamma 桥与物理实例。首次发布于 2026-07-12。</span>
     </li>
-    <li data-lang="zh">
+    <li data-lang="zh" data-cat="stats">
       <a href="notes/bridging-study_zh.html">Bridging Study 与 Follow-on CDx：概念、公式与全流程实例</a>
+      <span class="tag" data-zh="统计" data-en="Statistics">统计</span>
       <span class="desc">从精准医学与伴随诊断的试验设计出发，用一套已知真值的数据生成模型讲清 bridging、follow-on、一致性、缺失格敏感性与多重插补。首次发布于 2026-08-25。</span>
     </li>
-    <li data-lang="zh">
+    <li data-lang="zh" data-cat="econ">
       <a href="notes/inequality_origins_zh.html">再论不平等的起源</a>
+      <span class="tag" data-zh="经济" data-en="Economics">经济</span>
       <span class="desc">从卢梭的自然/人造二分出发，用守恒交换模型跑出运气基线（指数分布、基尼 1/2），再逐族测量能力、信贷、继承、增长与税收把不平等推向哪边。首次发布于 2026-10-26。</span>
     </li>
-    <li data-lang="en">
+    <li data-lang="en" data-cat="stats">
       <a href="notes/bridging-study_en.html">Bridging Studies and Follow-on Companion Diagnostics (CDx): Concepts, Formulas, and an End-to-End Worked Example</a>
+      <span class="tag" data-zh="统计" data-en="Statistics">Statistics</span>
       <span class="desc">Starting from precision-medicine and companion-diagnostic trial design, a known-truth data-generating model makes bridging, follow-on validation, agreement, missing-stratum sensitivity analysis, and multiple imputation concrete—deriving every formula and checking it against the simulated truth. Updated 2026-09-28.</span>
     </li>
-    <li data-lang="en">
+    <li data-lang="en" data-cat="econ">
       <a href="notes/inequality_origins_en.html">The Origins of Inequality, Revisited</a>
+      <span class="tag" data-zh="经济" data-en="Economics">Economics</span>
       <span class="desc">Starting from Rousseau's split between natural and artificial inequality, a conserving-exchange model produces a luck baseline (exponential distribution, Gini 1/2), then measures how ability, credit, inheritance, growth, and taxes push inequality up or down. First published 2026-10-26.</span>
     </li>
-    <li data-lang="en">
+    <li data-lang="en" data-cat="stats">
       <a href="notes/exp_normal_boltzmann_en.html">From Entropy to Distributions: The Unified Logic of Exponential, Power-Law, Normal, and Boltzmann</a>
+      <span class="tag" data-zh="统计" data-en="Statistics">Statistics</span>
       <span class="desc">How the maximum-entropy principle generates the exponential, power-law, normal, and Boltzmann distributions under different constraints—with the geometry of Lagrange multipliers, the counting argument, a Fourier proof of the CLT, the power-law↔exponential Gamma bridge, and physical examples. First published 2026-07-12.</span>
     </li>
   </ul>
@@ -105,33 +125,48 @@
   var LANGS = { zh: "zh-CN", en: "en" };
   var i18n = document.querySelectorAll("[data-zh]");
   var notes = document.querySelectorAll("ul.notes li");
-  var btns = document.querySelectorAll(".langbar button");
+  var langBtns = document.querySelectorAll(".langbar button");
+  var catBtns = document.querySelectorAll(".tagbtn");
+  var lang = "en";
+  var cat = "all";
 
-  function setLang(lang) {
-    if (lang !== "zh" && lang !== "en") lang = "zh";
+  function apply() {
     document.documentElement.lang = LANGS[lang];
-    // swap UI chrome text
+    // swap UI chrome text (language switch, category filter, card badges)
     i18n.forEach(function (el) { el.textContent = el.dataset[lang]; });
-    // show only notes in this language
+    // show only notes matching both the language and the category
     notes.forEach(function (li) {
-      li.classList.toggle("hidden", li.dataset.lang !== lang);
+      var langOK = li.dataset.lang === lang;
+      var catOK = cat === "all" || li.dataset.cat === cat;
+      li.classList.toggle("hidden", !(langOK && catOK));
     });
-    // hide a section heading with no visible note under it
-    document.querySelectorAll("h2").forEach(function (h) {
-      var list = h.nextElementSibling;
-      h.classList.toggle("hidden", !(list && list.querySelector("li:not(.hidden)")));
-    });
-    btns.forEach(function (b) {
+    langBtns.forEach(function (b) {
       b.setAttribute("aria-pressed", String(b.dataset.lang === lang));
     });
+    catBtns.forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.cat === cat));
+    });
+  }
+
+  function setLang(next) {
+    lang = (next === "zh") ? "zh" : "en";
+    apply();
     try { localStorage.setItem("lang", lang); } catch (e) {}
   }
 
-  btns.forEach(function (b) {
+  function setCat(next) {
+    cat = (next === "stats" || next === "econ") ? next : "all";
+    apply();
+  }
+
+  langBtns.forEach(function (b) {
     b.addEventListener("click", function () { setLang(b.dataset.lang); });
   });
+  catBtns.forEach(function (b) {
+    b.addEventListener("click", function () { setCat(b.dataset.cat); });
+  });
 
-  // initial language: saved choice → English default
+  // initial language: saved choice → English default; category always starts at "all"
   var saved = null;
   try { saved = localStorage.getItem("lang"); } catch (e) {}
   setLang(saved || "en");
