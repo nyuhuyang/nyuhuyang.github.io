@@ -1690,8 +1690,7 @@ border-radius: 0px;
 <h1 class="title toc-ignore">From Entropy to Distributions: The Unified
 Logic of Exponential, Power-Law, Normal, and Boltzmann</h1>
 <h4 class="author">Dr. Yang Hu</h4>
-<h4 class="date">First published: 2026-07-12 | Last updated: 2026-08-26
-15:37 EDT</h4>
+<h4 class="date">First published: 2026-07-12</h4>
 
 </div>
 
@@ -4102,11 +4101,24 @@ power laws, some are not at all—and the criterion goes back to the
 <td>criticality / preferential growth</td>
 </tr>
 <tr class="even">
-<td>The <strong>bulk</strong> of wealth, income</td>
+<td>The <strong>bulk</strong> of wealth, income (by population)</td>
 <td>power law</td>
-<td><strong>log-normal</strong> (only the extreme upper tail nears
-Pareto)</td>
-<td>multiplicative growth, no floor</td>
+<td><strong>exponential</strong> (the power law lives only in the upper
+tail)</td>
+<td>conservation + reflecting floor; in reality additive wages +
+income–spending balance</td>
+</tr>
+<tr class="odd">
+<td>The <strong>upper tail</strong> of wealth, income</td>
+<td>——</td>
+<td><strong>power law</strong> (Pareto, often truncated)</td>
+<td>multiplicative growth + floor (Kesten) / criticality</td>
+</tr>
+<tr class="even">
+<td>Pure multiplicative growth, no floor (Gibrat)</td>
+<td>power law</td>
+<td><strong>log-normal</strong> (transient; no stationary shape)</td>
+<td>multiplicative growth + CLT</td>
 </tr>
 <tr class="odd">
 <td>Most network degree distributions</td>
@@ -4128,12 +4140,23 @@ Pareto)</td>
 </tr>
 </tbody>
 </table>
+<p>Here “bulk” is by <strong>population</strong>: the segment holding
+the vast majority of people is exponential. By <strong>income/wealth
+share</strong>, the small top segment (the power-law tail) may take a
+large fraction—the two “bulks” are not the same thing. The empirical
+two-segment fits are in <span class="citation">(<a href="#ref-dragulescu2001b">Drăgulescu and Yakovenko 2001b</a>, <a href="#ref-dragulescu2001">2001a</a>; <a href="#ref-ludwig2022">Ludwig
+and Yakovenko 2022</a>; <a href="#ref-tao2019">Tao et al.
+2019</a>)</span>.</p>
 <p>Four processes, four fates: <strong>adding</strong> many small
-quantities → Gaussian; <strong>memoryless waiting</strong> →
-exponential; <strong>multiplying</strong> many small quantities with no
-lower floor → log-normal; multiplicative + <strong>reset/floor</strong>
-(Kesten) or <strong>criticality/preferential attachment</strong> → a
-true power law. So the empirical question “is it a power law” is
+quantities → Gaussian; <strong>memoryless waiting</strong>, or
+<strong>conservation + a reflecting floor</strong> (in reality, additive
+wage income + income–spending balance) → an <strong>exponential
+body</strong>; <strong>multiplying</strong> many small quantities with
+no lower floor → log-normal (a genuine mechanism, but not the observed
+wealth/income body—it has no stationary shape); multiplicative +
+<strong>reset/floor</strong> (Kesten) or
+<strong>criticality/preferential attachment</strong> → a true power-law
+<strong>tail</strong>. So the empirical question “is it a power law” is
 essentially “which process is behind it.” <strong>Heavy-tailed <span class="math inline">\(\ne\)</span> power law</strong>: the log-normal is
 equally heavy-tailed yet comes from a completely different mechanism,
 and on finite data it is often hard to distinguish from a power law—this
@@ -4145,20 +4168,21 @@ that alternative distributions often fit equally well or
 better</strong>. Note its two named prime
 rivals—<strong>log-normal</strong> and <strong>power law with
 exponential cutoff</strong>—are exactly the two already met in this
-chapter: the former from a multiplicative process + CLT (“Aside:
-wealth”), the latter the interior of the Gamma bridge. In other words,
-the empirical puzzle “is it a power law or one of those two” was already
-placed by this chapter’s maximum-entropy framework on the same family
-tree with all three. Practical tools: R’s <code>poweRlaw</code> package
-and Python’s <code>powerlaw</code> package both implement the recipe
-above.</p>
+chapter: the former from a pure multiplicative process + CLT—a genuine
+mechanism, but not the observed body (“Aside: wealth”)—the latter the
+interior of the Gamma bridge. In other words, the empirical puzzle “is
+it a power law or one of those two” was already placed by this chapter’s
+maximum-entropy framework on the same family tree with all three.
+Practical tools: R’s <code>poweRlaw</code> package and Python’s
+<code>powerlaw</code> package both implement the recipe above.</p>
 <p>The process table above is the “summary.” Next, “Real-world cases”
 makes <strong>two of its rows concrete</strong>—<strong>critical
 branching</strong> (producing a true power law <span class="math inline">\(T^{-3/2}\)</span>) and the <strong>multiplicative
-+ floor Kesten process</strong> (bulk log-normal, upper tail Pareto,
-often truncated)—to see how a concrete mechanism produces a power law,
-and incidentally how those two “rivals” emerge from the same batch of
-mechanisms.</p>
++ floor Kesten process</strong> (Kesten supplies the Pareto upper tail;
+the body is still the exponential from conservation + a reflecting
+floor, as the table above says)—to see how a concrete mechanism produces
+a power law, and incidentally how those two “rivals” emerge from the
+same batch of mechanisms.</p>
 </div>
 <div id="real-world-case-how-critical-branching-in-cell-lineages-gives-a-power-law-tail" class="section level2" number="4.11">
 <h2><span class="header-section-number">4.11</span> Real-world case: how
@@ -4282,18 +4306,29 @@ power law. Neither replaces the other.</p>
 <div id="aside-why-is-wealth-so-often-discussed-as-a-power-law" class="section level3" number="4.11.1">
 <h3><span class="header-section-number">4.11.1</span> Aside: why is
 wealth so often discussed as a power law?</h3>
-<p>This makes the <strong>second and third rows</strong> of the process
-table concrete (multiplicative growth, and multiplicative + floor).
-Wealth is a very useful contrast, correcting a common misstatement:
+<p>This makes the <strong>upper-tail row</strong> and the
+<strong>pure-multiplicative contrast row</strong> of the process table
+concrete (multiplicative + floor, and pure multiplicative). Wealth is a
+very useful contrast, correcting two common misstatements:
 <strong>“multiplicative growth necessarily produces a power law” is not
-true.</strong> With pure proportional growth</p>
+true, and neither is “the bulk of wealth/income is log-normal.”</strong>
+With pure proportional growth</p>
 <p><span class="math display">\[
 W_{t+1}=A_tW_t,
 \]</span></p>
 <p>then <span class="math inline">\(\ln W_t=\ln W_0+\sum_{s&lt;t}\ln
 A_s\)</span>; when many small independent growth rates add, the central
 limit theorem points first to a <strong>log-normal</strong>, not a power
-law.</p>
+law. But this is only the <strong>pure multiplicative, no-floor</strong>
+contrast: the recursion has no stationary state—the variance of <span class="math inline">\(\ln W\)</span> grows with <span class="math inline">\(t\)</span>, and the “log-normal” is only the
+transient shape at each time. The observed wealth/income body is not
+this. The body is <strong>exponential</strong>, fixed by conservation +
+a reflecting floor (in reality, additive wage income + income–spending
+balance); the empirical two-segment fits—UK net worth, US individual
+income, and cross-country income—all come out as “exponential body +
+Pareto upper tail.” <span class="citation">(<a href="#ref-dragulescu2001b">Drăgulescu and Yakovenko 2001b</a>, <a href="#ref-dragulescu2001">2001a</a>; <a href="#ref-ludwig2022">Ludwig
+and Yakovenko 2022</a>; <a href="#ref-tao2019">Tao et al.
+2019</a>)</span></p>
 <p>A classic class of mechanisms producing a Pareto tail adds, on top of
 proportional growth, a continuous inflow of income, a minimum guarantee,
 or re-entry:</p>
@@ -4312,16 +4347,19 @@ P(W&gt;w)\sim w^{-\alpha},
 <strong>tail/survival exponent</strong> (corresponding to the <span class="math inline">\(\lambda-1\)</span> of the earlier notation
 convention, i.e. density exponent <span class="math inline">\(\lambda=\alpha+1\)</span>). Intuitively, <span class="math inline">\(B_t\)</span> keeps wealth from falling to zero,
 while occasional runs of positive growth push a few trajectories very
-high; together they form a steady state that is “bulk with a scale,
-upper tail approximately scale-free.” <span class="citation">(<a href="#ref-kesten1973">Kesten 1973</a>; <a href="#ref-gabaix2009">Gabaix
+high—this explains why the <strong>upper tail</strong> is approximately
+scale-free; the exponential shape of the body still comes from
+conservation + a reflecting floor (above). <span class="citation">(<a href="#ref-kesten1973">Kesten 1973</a>; <a href="#ref-gabaix2009">Gabaix
 2009</a>)</span></p>
 <p>So what is common in wealth data is not a pure power law from bottom
-to top, but possibly a bulk that is approximately log-normal, nearing a
-Pareto tail only above a high threshold; taxation, bankruptcy, finite
-lifespan, and wealth ceilings all bend the tail down. Together with the
-cell-lineage example, it shows: a power law is not a universal label but
-a tail description jointly determined by the concrete mechanism, the
-observation scale, and the truncation conditions.</p>
+to top, but <strong>an exponential body, nearing a Pareto tail only
+above a high threshold</strong>; taxation, bankruptcy, finite lifespan,
+and wealth ceilings all bend the tail down. The log-normal plays the
+role of a contrast mechanism—pure multiplicative growth with no
+floor—not the observed body. Together with the cell-lineage example, it
+shows: a power law is not a universal label but a tail description
+jointly determined by the concrete mechanism, the observation scale, and
+the truncation conditions.</p>
 <hr />
 </div>
 </div>
@@ -5684,8 +5722,7 @@ coincidence is the part most worth turning over.</p>
 <hr />
 <p><em>By Dr. Yang Hu. English translation drafted with Claude (Opus
 4.8), reviewed by the author.</em></p>
-<p><em>First published: 2026-07-12. Last updated: 2026-08-26 15:37
-EDT.</em></p>
+<p><em>First published: 2026-07-12.</em></p>
 </div>
 <div id="bibliography" class="section level1 unnumbered">
 <h1 class="unnumbered">References</h1>
@@ -5697,11 +5734,11 @@ Neocortical Circuits.”</span> <em>The Journal of Neuroscience</em> 23
 </div>
 <div id="ref-boltzmann1877" class="csl-entry">
 Boltzmann, Ludwig. 1877. <span>“Ueber Die Beziehung Zwischen Dem Zweiten
-Hauptsatze Der Mechanischen w<span>&quot;a</span>rmetheorie Und Der
-Wahrscheinlichkeitsrechnung Respektive Den s<span>&quot;a</span>tzen <span class="nocase">&quot;u</span>ber Das
-w<span>&quot;a</span>rmegleichgewicht.”</span> <em>Sitzungsberichte Der
-Kaiserlichen Akademie Der Wissenschaften.
-Mathematisch-Naturwissenschaftliche Classe</em> 76: 373–435. <a href="https://doi.org/10.3390/e17041971">https://doi.org/10.3390/e17041971</a>.
+Hauptsatze Der Mechanischen Wärmetheorie Und Der
+Wahrscheinlichkeitsrechnung Respektive Den Sätzen Über Das
+Wärmegleichgewicht.”</span> <em>Sitzungsberichte Der Kaiserlichen
+Akademie Der Wissenschaften. Mathematisch-Naturwissenschaftliche
+Classe</em> 76: 373–435. <a href="https://doi.org/10.3390/e17041971">https://doi.org/10.3390/e17041971</a>.
 </div>
 <div id="ref-broidoclauset2019" class="csl-entry">
 Broido, Anna D., and Aaron Clauset. 2019. <span>“Scale-Free Networks Are
@@ -5715,6 +5752,18 @@ Atoms</em>. Oxford University Press.
 Clauset, Aaron, Cosma Rohilla Shalizi, and Mark E. J. Newman. 2009.
 <span>“Power-Law Distributions in Empirical Data.”</span> <em>SIAM
 Review</em> 51 (4): 661–703. <a href="https://doi.org/10.1137/070710111">https://doi.org/10.1137/070710111</a>.
+</div>
+<div id="ref-dragulescu2001" class="csl-entry">
+Drăgulescu, Adrian, and Victor M. Yakovenko. 2001a. <span>“Evidence for
+the Exponential Distribution of Income in the USA.”</span> <em>The
+European Physical Journal B</em> 20: 585–89. <a href="https://doi.org/10.1007/PL00011112">https://doi.org/10.1007/PL00011112</a>.
+</div>
+<div id="ref-dragulescu2001b" class="csl-entry">
+Drăgulescu, Adrian, and Victor M. Yakovenko. 2001b. <span>“Exponential
+and Power-Law Probability Distributions of Wealth and Income in the
+<span>United</span> <span>Kingdom</span> and the <span>United</span>
+<span>States</span>.”</span> <em>Physica A: Statistical Mechanics and
+Its Applications</em> 299 (1–2): 213–21. <a href="https://doi.org/10.1016/S0378-4371(01)00298-9">https://doi.org/10.1016/S0378-4371(01)00298-9</a>.
 </div>
 <div id="ref-gabaix2009" class="csl-entry">
 Gabaix, Xavier. 2009. <span>“Power Laws in Economics and
@@ -5733,6 +5782,12 @@ Kesten, Harry. 1973. <span>“Random Difference Equations and Renewal
 Theory for Products of Random Matrices.”</span> <em>Acta
 Mathematica</em> 131: 207–48. <a href="https://doi.org/10.1007/BF02392040">https://doi.org/10.1007/BF02392040</a>.
 </div>
+<div id="ref-ludwig2022" class="csl-entry">
+Ludwig, Danial, and Victor M. Yakovenko. 2022. <span>“Physics-Inspired
+Analysis of the Two-Class Income Distribution in the <span>USA</span> in
+1983–2018.”</span> <em>Philosophical Transactions of the Royal Society
+A</em> 380 (2224): 20210162. <a href="https://doi.org/10.1098/rsta.2021.0162">https://doi.org/10.1098/rsta.2021.0162</a>.
+</div>
 <div id="ref-demoivre1733" class="csl-entry">
 Moivre, Abraham de. 1733. <em>Approximatio Ad Summam Terminorum Binomii
 <span class="nocase">(a+b)</span>^n in Seriem Expansi</em>. <a href="https://doi.org/10.5281/zenodo.18913559">https://doi.org/10.5281/zenodo.18913559</a>.
@@ -5750,6 +5805,12 @@ Communication.”</span> <em>Bell System Technical Journal</em> 27 (3–4):
 <div id="ref-stirling1730" class="csl-entry">
 Stirling, James. 1730. <em>Methodus Differentialis: Sive Tractatus de
 Summatione Et Interpolatione Serierum Infinitarum</em>. G. Strahan. <a href="https://books.google.com/books?id=71ZHAAAAYAAJ">https://books.google.com/books?id=71ZHAAAAYAAJ</a>.
+</div>
+<div id="ref-tao2019" class="csl-entry">
+Tao, Yong, Xiangjun Wu, Tao Zhou, et al. 2019. <span>“Exponential
+Structure of Income Inequality: Evidence from 67 Countries.”</span>
+<em>Journal of Economic Interaction and Coordination</em> 14 (2):
+345–76. <a href="https://doi.org/10.1007/s11403-017-0211-6">https://doi.org/10.1007/s11403-017-0211-6</a>.
 </div>
 <div id="ref-tribus1971" class="csl-entry">
 Tribus, Myron, and Edward C. McIrvine. 1971. <span>“Energy and
